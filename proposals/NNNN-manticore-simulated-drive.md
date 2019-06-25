@@ -7,59 +7,43 @@
 
 ## Introduction
 
-Adding the ability to run simulated drives in Manticore will give app developers a commentate and complete
-way to test there apps against real driving situations
+Adding the ability to run simulated drives in Manticore will give app developers a convenient and complete
+way of testing their apps against real driving situations.
 
 ## Motivation
 
-Currently Manticore UI provides a build of SDL core, a logging ui for this instance of core, a
-generic hmi which provides an example display, and a mock vehicle hmi which is configurable in Manticore UI
-to affect things like vehicle speed, PRNDL status, gps location, fuel gauge and other information that
+Currently Manticore provides a build of SDL core, a logging ui for this instance of core, a
+generic hmi which provides an example display, and a mock vehicle hmi. The vehicle hmi 
+can be adjusted in Manticore UI to affect things like vehicle speed, PRNDL status, 
+gps location, fuel gauge and other information that
 would normally be collected from the vehicle.
 
-Being able to take this last piece of the vehicle hmi and have users be able to press start drive and then
+Being able to take the vehicle hmi and have users be able to press "start drive" and then
 have this data updated for them as you would expect in a real life scenario could greatly improve the
 developers experience in creating an sdl enabled app. There are also potential secondary benefits like
-a convenient way to demo applications that really on vehicle data.
+a convenient way to demo applications that rely on vehicle data.
 
 ## Proposed solution
 
-Add the ability to read a data file with as few fields as time, speed, and gps location and as many fields
-as are supported by the HMI today.
+Add the ability to read a data file with a few required fields (time, speed, and gps location) and optional fields
+like fuel gauge, acceleration pedal and others are supported by the HMI. This file can be played in real time or sped up. For
+example drives provided there should also be a dashcam video provided. The video and other information on
+the simulated drive will be placed on the right sidebar as a new tab selection.
 
 ## Potential downsides
 
-Describe any potential downsides or known objections to the course of action presented in this proposal, then provide counter-arguments to these objections. You should anticipate possible objections that may come up in review and provide an initial response here. Explain why the positives of the proposal outweigh the downsides, or why the downside under discussion is not a large enough issue to prevent the proposal from being accepted.
+It adds complexity to an already complicated setup, but this new feature will be contained within its own component and should
+not impact existing emulation with Manticore UI.
+
 
 ## Impact on existing code
 
-Describe the impact that this change will have on existing code. Will some SDL integrations stop compiling due to this change? Will applications still compile but produce different behavior than they used to? Is it possible to migrate existing SDL code to use a new feature or API automatically?
+The code changes will most likely be additions only and will not have a major impact on existing code. It has the potential
+to impact the Manticore UI's emulation sidebar especially when it comes to vehicle data.
+
 
 ## Alternatives considered
 
-Describe alternative approaches to addressing the same problem, and why you chose this approach instead.
-
-
-
-
-
-
-
-#Questions
-https://trello.com/c/Wc4rkohY/863-3-manticore-feature-request-simulated-drive-025
-
-basically gps route with vehicle speed, PRNDL status, etc
-
-"it would be cool for us to make an app that collects all of a vehicles' info during a drive and we can create simulations on manticore that trigger vehicle data events." - brett
-
-
-It sounds to me like this request is to make an android or ios app that can read the gps and other vehicle 
-RPCs. After this is should be able to playback this recording and emulate core?
-
-When an actual drive takes place it is core that gives info to any subscribers of the gps, speed, and PRNDL status.
-
-To simulate a drive either core would be told what the current status is from another system or core
-would be stubbed out by manticore.
-
-
-Trigger vehicle data events from manticore.
+This could be done as a separate service that connects to Manticore UI, but having it a part of the existing
+UI is much simpler. The proposed solution should be simple enough to integrate with the existing Manticore UI
+and complete enough to allow for a fully simulated drive.
