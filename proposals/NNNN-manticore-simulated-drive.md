@@ -26,9 +26,28 @@ a convenient way to demo applications that rely on vehicle data.
 ## Proposed solution
 
 Add the ability to read a data file with a few required fields (time, speed, and gps location) and optional fields
-like fuel gauge, acceleration pedal and others are supported by the HMI. This file can be played in real time or sped up. For
-example drives provided there should also be a dashcam video provided. The video and other information on
-the simulated drive will be placed on the right sidebar as a new tab selection.
+like fuel gauge, acceleration pedal and others are supported by the HMI. This file can be played in real time or sped up.
+A few example drives will be included to select without requiring the user to create their own file.
+
+### Simulated Drive UI
+The UI will include the vehicle data, turn by turn directions, a map, and optionally a video.
+
+#### Vehicle Data Display
+The most recent gps, speed, and other vehicle info being read from the datafile will be displayed to the user
+with fields like speed being displayed on the same line and fields like gps being collapsible.
+
+#### Turn By Turn Directions
+Turn by turn directions will be included in the display as a way for users to view the drive's progress
+and as a way to start at specific parts of the drive.
+
+#### Map Display
+An embedded map will be shown to give the user a view of the trip from start to finish. Google Maps API
+will be used to implement this.
+
+#### Video
+An optional video will be displayed that is synced with the data file and will give the user a driver's
+point of view.
+
 
 ## Potential downsides
 
@@ -47,3 +66,4 @@ to impact the Manticore UI's emulation sidebar especially when it comes to vehic
 This could be done as a separate service that connects to Manticore UI, but having it a part of the existing
 UI is much simpler. The proposed solution should be simple enough to integrate with the existing Manticore UI
 and complete enough to allow for a fully simulated drive.
+
