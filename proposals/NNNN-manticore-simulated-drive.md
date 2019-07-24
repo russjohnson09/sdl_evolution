@@ -25,29 +25,35 @@ a convenient way to demo applications that rely on vehicle data.
 
 ## Proposed solution
 
-Add the ability to read a data file with a few required fields (time, speed, and gps location) and optional fields
-like fuel gauge, acceleration pedal and others are supported by the HMI. This file can be played in real time or sped up.
+Add the ability to read a data file with vehicle data and time. This file can be played in real time or sped up.
 A few example drives will be included to select without requiring the user to create their own file.
 
+
+## Data File
+A csv file can be loaded as a test drive. The required fields are time and rpc. The ```VehicleInfo.OnVehicleData``` method will
+be used to update the vehicle data and all params supported by this method can be included. Bellow is an example csv.
+
+|                          |                                                                                                                                                                      |                           | 
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------| 
+| time                     | rpc                                                                                                                                                                  | step                      | 
+| 2019-07-24T13:20:14.000Z | {"jsonrpc":"2.0","method":"VehicleInfo.OnVehicleData","params":{"prdnl":"PARK","speed":0,"gps":{"longitudeDegrees":42.5,"latitudeDegrees":-83.3,"altitude":7.7}}}    | Exiting Parking Lot       | 
+| 2019-07-24T13:20:15.000Z | {"jsonrpc":"2.0","method":"VehicleInfo.OnVehicleData","params":{"prdnl":"FIRST","speed":2,"gps":{"longitudeDegrees":42.5,"latitudeDegrees":-83.3,"altitude":7.7}}}   | Turning Left On Main St.  | 
+| 2019-07-24T13:20:16.000Z | {"jsonrpc":"2.0","method":"VehicleInfo.OnVehicleData","params":{"prdnl":"FIRST","speed":2,"gps":{"longitudeDegrees":42.5,"latitudeDegrees":-83.3,"altitude":7.7}}}   | Heading South On Main St. | 
+| 2019-07-24T13:20:17.000Z | {"jsonrpc":"2.0","method":"VehicleInfo.OnVehicleData","params":{"prdnl":"FIRST","speed":2,"gps":{"longitudeDegrees":42.5,"latitudeDegrees":-83.3,"altitude":7.7}}}   |                           | 
+| 2019-07-24T13:20:18.000Z | {"jsonrpc":"2.0","method":"VehicleInfo.OnVehicleData","params":{"prdnl":"SECOND","speed":10,"gps":{"longitudeDegrees":42.5,"latitudeDegrees":-83.3,"altitude":7.7}}} | Turning Right on Third    | 
+
+The step column can be used to create named steps in the drive that will be displayed by the UI.
+
 ### Simulated Drive UI
-The UI will include the vehicle data, turn by turn directions, a map, and optionally a video.
+The UI will include the vehicle data, a progress bar and a play/pause button.
 
 #### Vehicle Data Display
 The most recent gps, speed, and other vehicle info being read from the datafile will be displayed to the user
 with fields like speed being displayed on the same line and fields like gps being collapsible.
 
-#### Turn By Turn Directions
-Turn by turn directions will be included in the display as a way for users to view the drive's progress
+####Steps
+Steps will be included in the display if provided from the data file as a way for users to view the drive's progress
 and as a way to start at specific parts of the drive.
-
-#### Map Display
-An embedded map will be shown to give the user a view of the trip from start to finish. Google Maps API
-will be used to implement this.
-
-#### Video
-An optional video will be displayed that is synced with the data file and will give the user a driver's
-point of view.
-
 
 ## Potential downsides
 
