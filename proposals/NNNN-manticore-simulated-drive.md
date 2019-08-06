@@ -30,8 +30,9 @@ A few example drives will be included to select without requiring the user to cr
 
 
 ## Data File
+
 A csv file can be loaded as a test drive. The required fields are time and rpc. The ```VehicleInfo.OnVehicleData``` method will
-be used to update the vehicle data and all params supported by this method can be included. Bellow is an example csv.
+be used to update the vehicle data and all params supported by this method can be included. Below is an example csv.
 
 |                          |                                                                                                                                                                      |                           | 
 |--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------| 
@@ -51,7 +52,7 @@ The UI will include the vehicle data, a progress bar and a play/pause button.
 The most recent gps, speed, and other vehicle info being read from the datafile will be displayed to the user
 with fields like speed being displayed on the same line and fields like gps being collapsible.
 
-####Steps
+#### Steps
 Steps will be included in the display if provided from the data file as a way for users to view the drive's progress
 and as a way to start at specific parts of the drive.
 
